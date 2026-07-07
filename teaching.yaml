@@ -1,0 +1,213 @@
+name: cypher-teaching
+label: Cypher · Teaching — Clearroom
+description: "morning light on a well-kept classroom table — light."
+
+palette:
+  background:
+    hex: "#e8e6e0"
+    alpha: 1.0
+  midground:
+    hex: "#20211c"
+    alpha: 1.0
+  foreground:
+    hex: "#2d7a58"
+    alpha: 0.0
+  warmGlow: "rgba(32, 33, 28, 0.05)"
+  noiseOpacity: 0
+
+typography:
+  fontSans: '"Literata", "Literata Fallback", Georgia, serif'
+  fontMono: '"Red Hat Mono", "RHM Fallback", ui-monospace, "Courier New", monospace'
+  fontDisplay: '"Literata", "Literata Fallback", Georgia, serif'
+  fontUrl: "https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Red+Hat+Mono:wght@400..700&display=swap"
+  baseSize: "17px"
+  lineHeight: "1.55"
+  letterSpacing: "0"
+
+layout:
+  radius: "0.5rem"
+  density: comfortable
+
+assets:
+  bg: "none"
+
+colorOverrides:
+  card: "#eeeeee"
+  cardForeground: "#20211c"
+  popover: "#eeede7"
+  popoverForeground: "#20211c"
+  primary: "#2d7a58"
+  primaryForeground: "#fdfcf6"
+  secondary: "#eeede7"
+  secondaryForeground: "#20211c"
+  muted: "#eeede7"
+  mutedForeground: "#60615f"
+  accent: "#eeede7"
+  accentForeground: "#2d7a58"
+  destructive: "#a93529"
+  destructiveForeground: "#fdfcf6"
+  success: "#2d7a58"
+  warning: "#8a6116"
+  border: "#ddd9cb"
+  input: "#ddd9cb"
+  ring: "#2d7a58"
+
+componentStyles:
+  card:
+    background: "#eeeeee"
+    boxShadow: "0 1px 2px rgba(28, 26, 21, 0.05), 0 4px 12px rgba(28, 26, 21, 0.07)"
+  header:
+    background: "#e8e6e0"
+    borderBottom: "1px solid #ddd9cb"
+  backdrop:
+    background: "#e8e6e0"
+    fillerOpacity: "0"
+    fillerBlendMode: "normal"
+    backgroundSize: "auto"
+    backgroundPosition: "center"
+
+customCSS: |
+  /* Canvas + core design-system vars. */
+  :root {
+    --background: #e8e6e0 !important;
+    --background-base: #e8e6e0 !important;
+    --midground: #20211c !important;
+    --midground-base: #20211c !important;
+    --foreground: #20211c !important;
+    --foreground-base: #20211c !important;
+    --color-foreground: #20211c !important;
+    --color-card: #eeeeee !important;
+    --color-card-foreground: #20211c !important;
+    --color-popover: #eeede7 !important;
+    --color-popover-foreground: #20211c !important;
+    --color-primary: #2d7a58 !important;
+    --color-primary-foreground: #fdfcf6 !important;
+    --color-secondary: #eeede7 !important;
+    --color-secondary-foreground: #20211c !important;
+    --color-muted: #eeede7 !important;
+    --color-muted-foreground: #60615f !important;
+    --color-accent: #eeede7 !important;
+    --color-accent-foreground: #2d7a58 !important;
+    --color-destructive: #a93529 !important;
+    --color-ring: #2d7a58 !important;
+    --warm-glow: rgba(32, 33, 28, 0.05) !important;
+    --noise-opacity-mul: 0 !important;
+    --theme-asset-bg: none !important;
+    --component-backdrop-filler-opacity: 0 !important;
+    --component-backdrop-filler-blend-mode: normal !important;
+    --border: 47 21% 83% !important;
+  }
+
+  .border-border { border-color: #ddd9cb !important; }
+
+  /* Root canvas + default text color. */
+  html, body, #root, #root > div {
+    background: #e8e6e0 !important;
+    background-color: #e8e6e0 !important;
+    background-image: none !important;
+    color: #20211c !important;
+  }
+  #root > div.bg-black,
+  #root > div[class*="bg-black"] {
+    background: #e8e6e0 !important;
+    background-color: #e8e6e0 !important;
+    color: #20211c !important;
+  }
+
+  /* Kill branded backdrop / filler layers. */
+  body::before, body::after, #root::before, #root::after {
+    background: none !important; background-image: none !important; box-shadow: none !important;
+  }
+  .pointer-events-none.fixed.inset-0[aria-hidden="true"] {
+    display: none !important; opacity: 0 !important; background: none !important;
+  }
+  .theme-default-filler, img.theme-default-filler {
+    display: none !important; opacity: 0 !important; visibility: hidden !important;
+  }
+
+  /* Fonts: Cypher mono for code, Literata for the rest. */
+  code, kbd, pre, samp, .font-mono, .font-mono-ui, .xterm, .xterm * {
+    font-family: "Red Hat Mono", "RHM Fallback", ui-monospace, "Courier New", monospace !important;
+  }
+
+  /* THE FIX: the shell paints a lot of text with text-white / text-background.
+     On a LIGHT canvas that must resolve to the theme's
+     dark ink, or it is invisible (light-on-light). */
+  h1, h2, h3, h4, h5, h6, label, p, li, dt, dd, th, td,
+  [class~="text-white"]:not(.xterm):not(.xterm *),
+  [class*="text-white/"]:not(.xterm):not(.xterm *),
+  [class~="text-background"]:not(.xterm):not(.xterm *),
+  [class*="text-background/"]:not(.xterm):not(.xterm *),
+  [class~="text-foreground"], [class~="text-neutral-900"], [class~="text-zinc-900"] {
+    color: #20211c !important;
+  }
+  [class~="text-muted-foreground"], [class*="text-muted-foreground/"],
+  [class~="text-neutral-500"], [class~="text-neutral-400"],
+  [class~="text-zinc-500"], [class~="text-zinc-400"],
+  [class~="text-gray-500"], [class~="text-slate-500"] {
+    color: #60615f !important;
+  }
+  svg[class~="text-white"], [class~="text-white"] svg, [class*="text-white/"] svg {
+    color: #60615f !important; fill: currentColor !important; stroke: currentColor !important;
+  }
+
+  /* Primary/accent surfaces carry on-accent text. */
+  [class~="bg-primary"], [class~="bg-blue-500"], [class~="bg-blue-600"], [class~="bg-blue-700"] {
+    background-color: #2d7a58 !important; color: #fdfcf6 !important;
+  }
+  [class~="bg-primary"] *, [class~="bg-blue-600"] * {
+    color: #fdfcf6 !important; fill: #fdfcf6 !important; stroke: #fdfcf6 !important;
+  }
+
+  /* Links + headings. */
+  a { color: #215f44 !important; }
+  h1 { font-size: 1.5rem !important; font-weight: 700 !important; }
+  h2 { font-size: 1.2rem !important; font-weight: 700 !important; }
+  h3 { font-weight: 600 !important; }
+
+  /* Active controls -> primary reverse-video. */
+  button[aria-current="page"], button[aria-selected="true"], button[aria-pressed="true"],
+  button[data-state="active"], button[data-active="true"],
+  [role="button"][aria-current="page"], [role="button"][data-state="active"] {
+    background: #2d7a58 !important; background-color: #2d7a58 !important;
+    background-image: none !important; color: #fdfcf6 !important; border-color: #2d7a58 !important;
+  }
+  button[aria-current="page"] *, button[data-state="active"] *,
+  [role="button"][aria-current="page"] * {
+    color: #fdfcf6 !important; fill: #fdfcf6 !important; stroke: #fdfcf6 !important;
+  }
+
+  /* Sidebar: chrome tint, legible sizing, primary active row. */
+  #app-sidebar {
+    background: #eeeeee !important; background-color: #eeeeee !important;
+    border-right: 1px solid #ddd9cb !important;
+  }
+  #app-sidebar nav a, #app-sidebar nav a[class*="opacity-"] {
+    opacity: 1 !important; color: #20211c !important; font-weight: 500 !important;
+    border-radius: 0.5rem !important; margin: 0.1rem 0.5rem !important;
+    padding-top: 0.6rem !important; padding-bottom: 0.6rem !important;
+  }
+  #app-sidebar nav a svg, #app-sidebar nav a span { color: inherit !important; }
+  #app-sidebar nav a[aria-current="page"] {
+    background: #2d7a58 !important; color: #fdfcf6 !important; opacity: 1 !important;
+  }
+  #app-sidebar nav a[aria-current="page"] svg, #app-sidebar nav a[aria-current="page"] span {
+    color: #fdfcf6 !important;
+  }
+  #app-sidebar nav a, #app-sidebar nav a span,
+  #app-sidebar li [role="button"], #app-sidebar li button, #app-sidebar li button span {
+    font-size: 0.98rem !important; line-height: 1.35 !important;
+  }
+  #app-sidebar nav svg, #app-sidebar li svg { width: 1rem !important; height: 1rem !important; }
+  #app-sidebar [id="hermes-sidebar-plugin-nav-heading"],
+  #app-sidebar > div > span, #app-sidebar [class*="text-[0.6rem]"] {
+    font-size: 0.82rem !important; line-height: 1.25 !important; color: #60615f !important;
+  }
+
+  /* Kanban: wrap instead of horizontal scroll. */
+  .hermes-kanban-columns {
+    display: flex !important; flex-wrap: wrap !important; align-items: stretch !important;
+    overflow-x: visible !important; gap: 0.75rem !important;
+  }
+  .hermes-kanban-column { flex: 1 1 280px !important; min-width: 260px !important; max-width: 420px !important; max-height: none !important; }
+  @media (max-width: 720px) { .hermes-kanban-column { flex-basis: 100% !important; max-width: none !important; } }

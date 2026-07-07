@@ -1,0 +1,213 @@
+name: cypher-architect
+label: Cypher · Architect — Signal Hierarchy
+description: "live traces on the operations room's glass — dark."
+
+palette:
+  background:
+    hex: "#15181e"
+    alpha: 1.0
+  midground:
+    hex: "#e9e7de"
+    alpha: 1.0
+  foreground:
+    hex: "#86a8ff"
+    alpha: 0.0
+  warmGlow: "rgba(233, 231, 222, 0.05)"
+  noiseOpacity: 0
+
+typography:
+  fontSans: '"Literata", "Literata Fallback", Georgia, serif'
+  fontMono: '"Red Hat Mono", "RHM Fallback", ui-monospace, "Courier New", monospace'
+  fontDisplay: '"Literata", "Literata Fallback", Georgia, serif'
+  fontUrl: "https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400..700;1,7..72,400..600&family=Red+Hat+Mono:wght@400..700&display=swap"
+  baseSize: "17px"
+  lineHeight: "1.55"
+  letterSpacing: "0"
+
+layout:
+  radius: "0.5rem"
+  density: comfortable
+
+assets:
+  bg: "none"
+
+colorOverrides:
+  card: "#212631"
+  cardForeground: "#e9e7de"
+  popover: "#1b1f27"
+  popoverForeground: "#e9e7de"
+  primary: "#86a8ff"
+  primaryForeground: "#10131a"
+  secondary: "#1b1f27"
+  secondaryForeground: "#e9e7de"
+  muted: "#1b1f27"
+  mutedForeground: "#9f9c90"
+  accent: "#1b1f27"
+  accentForeground: "#86a8ff"
+  destructive: "#e07a6d"
+  destructiveForeground: "#10131a"
+  success: "#63bd90"
+  warning: "#dfb05e"
+  border: "rgba(233, 231, 222, 0.14)"
+  input: "rgba(233, 231, 222, 0.14)"
+  ring: "#86a8ff"
+
+componentStyles:
+  card:
+    background: "#212631"
+    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.3), 0 4px 12px rgba(0, 0, 0, 0.35)"
+  header:
+    background: "#15181e"
+    borderBottom: "1px solid rgba(233, 231, 222, 0.14)"
+  backdrop:
+    background: "#15181e"
+    fillerOpacity: "0"
+    fillerBlendMode: "normal"
+    backgroundSize: "auto"
+    backgroundPosition: "center"
+
+customCSS: |
+  /* Canvas + core design-system vars. */
+  :root {
+    --background: #15181e !important;
+    --background-base: #15181e !important;
+    --midground: #e9e7de !important;
+    --midground-base: #e9e7de !important;
+    --foreground: #e9e7de !important;
+    --foreground-base: #e9e7de !important;
+    --color-foreground: #e9e7de !important;
+    --color-card: #212631 !important;
+    --color-card-foreground: #e9e7de !important;
+    --color-popover: #1b1f27 !important;
+    --color-popover-foreground: #e9e7de !important;
+    --color-primary: #86a8ff !important;
+    --color-primary-foreground: #10131a !important;
+    --color-secondary: #1b1f27 !important;
+    --color-secondary-foreground: #e9e7de !important;
+    --color-muted: #1b1f27 !important;
+    --color-muted-foreground: #9f9c90 !important;
+    --color-accent: #1b1f27 !important;
+    --color-accent-foreground: #86a8ff !important;
+    --color-destructive: #e07a6d !important;
+    --color-ring: #86a8ff !important;
+    --warm-glow: rgba(233, 231, 222, 0.05) !important;
+    --noise-opacity-mul: 0 !important;
+    --theme-asset-bg: none !important;
+    --component-backdrop-filler-opacity: 0 !important;
+    --component-backdrop-filler-blend-mode: normal !important;
+    --border: 0 NaN% NaN% !important;
+  }
+
+  .border-border { border-color: rgba(233, 231, 222, 0.14) !important; }
+
+  /* Root canvas + default text color. */
+  html, body, #root, #root > div {
+    background: #15181e !important;
+    background-color: #15181e !important;
+    background-image: none !important;
+    color: #e9e7de !important;
+  }
+  #root > div.bg-black,
+  #root > div[class*="bg-black"] {
+    background: #15181e !important;
+    background-color: #15181e !important;
+    color: #e9e7de !important;
+  }
+
+  /* Kill branded backdrop / filler layers. */
+  body::before, body::after, #root::before, #root::after {
+    background: none !important; background-image: none !important; box-shadow: none !important;
+  }
+  .pointer-events-none.fixed.inset-0[aria-hidden="true"] {
+    display: none !important; opacity: 0 !important; background: none !important;
+  }
+  .theme-default-filler, img.theme-default-filler {
+    display: none !important; opacity: 0 !important; visibility: hidden !important;
+  }
+
+  /* Fonts: Cypher mono for code, Literata for the rest. */
+  code, kbd, pre, samp, .font-mono, .font-mono-ui, .xterm, .xterm * {
+    font-family: "Red Hat Mono", "RHM Fallback", ui-monospace, "Courier New", monospace !important;
+  }
+
+  /* THE FIX: the shell paints a lot of text with text-white / text-background.
+     On a dark canvas that must resolve to the theme's
+     light ink, or it is fine. */
+  h1, h2, h3, h4, h5, h6, label, p, li, dt, dd, th, td,
+  [class~="text-white"]:not(.xterm):not(.xterm *),
+  [class*="text-white/"]:not(.xterm):not(.xterm *),
+  [class~="text-background"]:not(.xterm):not(.xterm *),
+  [class*="text-background/"]:not(.xterm):not(.xterm *),
+  [class~="text-foreground"], [class~="text-neutral-900"], [class~="text-zinc-900"] {
+    color: #e9e7de !important;
+  }
+  [class~="text-muted-foreground"], [class*="text-muted-foreground/"],
+  [class~="text-neutral-500"], [class~="text-neutral-400"],
+  [class~="text-zinc-500"], [class~="text-zinc-400"],
+  [class~="text-gray-500"], [class~="text-slate-500"] {
+    color: #9f9c90 !important;
+  }
+  svg[class~="text-white"], [class~="text-white"] svg, [class*="text-white/"] svg {
+    color: #9f9c90 !important; fill: currentColor !important; stroke: currentColor !important;
+  }
+
+  /* Primary/accent surfaces carry on-accent text. */
+  [class~="bg-primary"], [class~="bg-blue-500"], [class~="bg-blue-600"], [class~="bg-blue-700"] {
+    background-color: #86a8ff !important; color: #10131a !important;
+  }
+  [class~="bg-primary"] *, [class~="bg-blue-600"] * {
+    color: #10131a !important; fill: #10131a !important; stroke: #10131a !important;
+  }
+
+  /* Links + headings. */
+  a { color: #86a8ff !important; }
+  h1 { font-size: 1.5rem !important; font-weight: 700 !important; }
+  h2 { font-size: 1.2rem !important; font-weight: 700 !important; }
+  h3 { font-weight: 600 !important; }
+
+  /* Active controls -> primary reverse-video. */
+  button[aria-current="page"], button[aria-selected="true"], button[aria-pressed="true"],
+  button[data-state="active"], button[data-active="true"],
+  [role="button"][aria-current="page"], [role="button"][data-state="active"] {
+    background: #86a8ff !important; background-color: #86a8ff !important;
+    background-image: none !important; color: #10131a !important; border-color: #86a8ff !important;
+  }
+  button[aria-current="page"] *, button[data-state="active"] *,
+  [role="button"][aria-current="page"] * {
+    color: #10131a !important; fill: #10131a !important; stroke: #10131a !important;
+  }
+
+  /* Sidebar: chrome tint, legible sizing, primary active row. */
+  #app-sidebar {
+    background: #212631 !important; background-color: #212631 !important;
+    border-right: 1px solid rgba(233, 231, 222, 0.14) !important;
+  }
+  #app-sidebar nav a, #app-sidebar nav a[class*="opacity-"] {
+    opacity: 1 !important; color: #e9e7de !important; font-weight: 500 !important;
+    border-radius: 0.5rem !important; margin: 0.1rem 0.5rem !important;
+    padding-top: 0.6rem !important; padding-bottom: 0.6rem !important;
+  }
+  #app-sidebar nav a svg, #app-sidebar nav a span { color: inherit !important; }
+  #app-sidebar nav a[aria-current="page"] {
+    background: #86a8ff !important; color: #10131a !important; opacity: 1 !important;
+  }
+  #app-sidebar nav a[aria-current="page"] svg, #app-sidebar nav a[aria-current="page"] span {
+    color: #10131a !important;
+  }
+  #app-sidebar nav a, #app-sidebar nav a span,
+  #app-sidebar li [role="button"], #app-sidebar li button, #app-sidebar li button span {
+    font-size: 0.98rem !important; line-height: 1.35 !important;
+  }
+  #app-sidebar nav svg, #app-sidebar li svg { width: 1rem !important; height: 1rem !important; }
+  #app-sidebar [id="hermes-sidebar-plugin-nav-heading"],
+  #app-sidebar > div > span, #app-sidebar [class*="text-[0.6rem]"] {
+    font-size: 0.82rem !important; line-height: 1.25 !important; color: #9f9c90 !important;
+  }
+
+  /* Kanban: wrap instead of horizontal scroll. */
+  .hermes-kanban-columns {
+    display: flex !important; flex-wrap: wrap !important; align-items: stretch !important;
+    overflow-x: visible !important; gap: 0.75rem !important;
+  }
+  .hermes-kanban-column { flex: 1 1 280px !important; min-width: 260px !important; max-width: 420px !important; max-height: none !important; }
+  @media (max-width: 720px) { .hermes-kanban-column { flex-basis: 100% !important; max-width: none !important; } }
