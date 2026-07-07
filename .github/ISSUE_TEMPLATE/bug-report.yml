@@ -1,0 +1,25 @@
+name: Bug — a theme reads wrong
+description: Something is illegible, miscolored, or hidden in a theme.
+labels: [bug]
+body:
+  - type: dropdown
+    id: theme
+    attributes:
+      label: Which theme?
+      options: [core, teaching, cypher, architect, hermes]
+    validations: { required: true }
+  - type: textarea
+    id: what
+    attributes:
+      label: What's wrong?
+      description: What did you expect vs. what you saw. A screenshot helps enormously.
+    validations: { required: true }
+  - type: input
+    id: where
+    attributes:
+      label: Where in the dashboard?
+      placeholder: e.g. sidebar active item, kanban card, cron table
+  - type: input
+    id: version
+    attributes:
+      label: Hermes dashboard version

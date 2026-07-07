@@ -1,0 +1,15 @@
+name: Theme request
+description: A palette or vibe you'd love to see.
+labels: [theme-request]
+body:
+  - type: input
+    id: name
+    attributes:
+      label: What would you call it?
+    validations: { required: true }
+  - type: textarea
+    id: vibe
+    attributes:
+      label: The vibe
+      description: Colors, mood, references. Light or dark? What should it feel like to work in?
+    validations: { required: true }
